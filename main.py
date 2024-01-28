@@ -1,4 +1,4 @@
-import ctypes, json, os, time, random, string, getpass, threading, re, sys
+import json, os, time, random, string, getpass, threading, re, sys
 
 try:
     import pystyle
@@ -38,7 +38,6 @@ generated_agents = 0
 total = 1
 
 start = time.time()
-ctypes.windll.kernel32.SetConsoleTitleW(f'[ Tiktok MassReport ] By H4cK3dR4Du & 452b')
 
 def save_proxies(proxies):
     with open("proxies.txt", "w") as file:
@@ -88,12 +87,7 @@ with open(f"config.json") as f:
         check_proxies_file()
     else:
         pass
-
-def update_console_title():
-    global success, failed, generated_agents, total
-    success_rate = round(success/total*100,2)
-    ctypes.windll.kernel32.SetConsoleTitleW(f'[ Tiktok MassReport ] By H4cK3dR4Du & 452b | Reports Sent : {success} ~ Failed : {failed} ~ Success Rate : {success_rate}%')
-
+    
 def get_time_rn():
     date = datetime.datetime.now()
     hour = date.hour
@@ -214,7 +208,6 @@ def mass_report():
                     Write.Print(f"{username} ~ {iduser}\n", Colors.purple_to_red, interval=0.000)
                     success += 1
                     total += 1
-                    update_console_title()
                     mass_report()
             else:
                 with output_lock:
@@ -224,14 +217,12 @@ def mass_report():
                     Write.Print(f"{username} ~ {iduser}\n", Colors.purple_to_red, interval=0.000)
                     failed += 1
                     total += 1
-                    update_console_title()
                     mass_report()
         else:
             mass_report()  
     except Exception as e:
         failed += 1
         total += 1
-        update_console_title()
         mass_report()
 
 def mass_report_thread():
